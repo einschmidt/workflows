@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v3
       - name: 🚀 Run add-on information action
         id: information
-        uses: frenck/action-addon-information@v1.4
+        uses: frenck/action-addon-information@v1.4.0
       - name: 🚀 Process possible slug override
         id: override
         run: |
@@ -119,6 +119,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: ⤵️ Download base image
+        if: steps.flags.outputs.from != 'null'
         run: docker pull "${{ steps.flags.outputs.from }}"
       - name: 🚀 Build
         uses: docker/build-push-action@v3.0.0
@@ -172,7 +173,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v2.0.0
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
           repository: einschmidt/hassio-addons-edge
@@ -198,7 +199,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v2.0.0
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
           repository: einschmidt/hassio-addons-beta
@@ -222,7 +223,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v2.0.0
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
           repository: einschmidt/hassio-addons
