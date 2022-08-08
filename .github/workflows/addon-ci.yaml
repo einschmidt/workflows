@@ -171,7 +171,7 @@ jobs:
         if: steps.flags.outputs.from != 'null'
         run: docker pull "${{ steps.flags.outputs.from }}"
       - name: 🚀 Build
-        uses: docker/build-push-action@v3.1.0
+        uses: docker/build-push-action@v3.1.1
         with:
           push: false
           context: ${{ needs.information.outputs.target }}
