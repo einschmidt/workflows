@@ -84,6 +84,8 @@ jobs:
         uses: ludeeus/action-shellcheck@1.1.0
         env:
           SHELLCHECK_OPTS: -s bash
+        with:
+          version: v0.8.0
 
   lint-yamllint:
     name: YAMLLint
