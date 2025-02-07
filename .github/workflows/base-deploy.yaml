@@ -50,7 +50,7 @@ jobs:
   deploy:
     name: 👷 Build & Deploy ${{ matrix.architecture }}
     needs: information
-    runs-on: ubuntu-latest
+    runs-on: ${{ contains(fromJson('["armhf", "armv7", "aarch64"]'), matrix.architecture) && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     strategy:
       matrix:
         architecture: ${{ fromJson(needs.information.outputs.architectures) }}
