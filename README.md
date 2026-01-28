@@ -1,11 +1,11 @@
 # GitHub Action Workflows
 
-GitHub Actions Workflows for Home Assistant Add-ons
+GitHub Actions Workflows for Home Assistant Apps
 
 ## About
 
 This repository contains GitHub Actions Workflows that are shared across
-the other Home Assistant Add-ons repositories.
+the other Home Assistant Apps repositories.
 
 It allows us to maintain all our workflows in a single place and reuse
 them across.
@@ -16,7 +16,7 @@ other project is possible, but not recommended for that reason.
 
 ## Changelog & Releases
 
-Unlike all other projects provided by the Home Assistant Community Add-ons
+Unlike all other projects provided by the Home Assistant Community Apps
 project, this repository isn't versioned (in terms of releases).
 
 If you want to see what has changed, please see the commit history of the
@@ -26,7 +26,7 @@ main branch: <https://github.com/einschmidt/workflows/commits/main>
 
 MIT License
 
-Copyright (c) 2021 Einschmidt
+Copyright (c) 2026 Einschmidt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
