@@ -94,13 +94,13 @@ jobs:
           fi
       - name: 🏗  Login to GitHub Container Registry
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+            exit 1
+          fi
+      - name: 🏗  Login to GitHub Container Registry
+        uses: docker/login-action@v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: 🚀 Build
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
-        with:
           load: true
           # yamllint disable rule:line-length
           tags: |
@@ -159,12 +159,12 @@ jobs:
           VERSION: ${{ needs.information.outputs.version }}
         # yamllint disable rule:line-length
         run: |
-          docker buildx imagetools create \
-            --tag "ghcr.io/${REPO_OWNER}/${SLUG}:${ENVIRONMENT}" \
-            "ghcr.io/${REPO_OWNER}/${SLUG}/amd64:${VERSION}" \
-            "ghcr.io/${REPO_OWNER}/${SLUG}/aarch64:${VERSION}"
-
-          docker buildx imagetools create \
-            --tag "ghcr.io/${REPO_OWNER}/${SLUG}:${VERSION}" \
+             "ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}:${{ needs.information.outputs.version }}" \
+             "${images[@]}"
+      - name: 🏗  Login to GitHub Container Registry
+        uses: docker/login-action@v3.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
             "ghcr.io/${REPO_OWNER}/${SLUG}/amd64:${VERSION}" \
             "ghcr.io/${REPO_OWNER}/${SLUG}/aarch64:${VERSION}"
