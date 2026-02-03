@@ -22,4 +22,3 @@ jobs:
     uses: ./.github/workflows/app-ci.yaml
     with:
       slug: ${{ inputs.slug }}
-      
