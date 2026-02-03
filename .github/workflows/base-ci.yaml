@@ -74,7 +74,7 @@ jobs:
           persist-credentials: false
       - name: 🚀 Run JQ
         run: |
-          shopt -s globstar
+          shopt -s globstar nullglob
           cat **/*.json | jq '.'
 
   lint-shellcheck:

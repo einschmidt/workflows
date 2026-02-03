@@ -141,14 +141,18 @@ jobs:
           SLUG: ${{ needs.information.outputs.slug }}
           ENVIRONMENT: ${{ needs.information.outputs.environment }}
           VERSION: ${{ needs.information.outputs.version }}
+          ARCHITECTURES: ${{ needs.information.outputs.architectures }}
         # yamllint disable rule:line-length
         run: |
-             "ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}:${{ needs.information.outputs.version }}" \
-             "${images[@]}"
-      - name: 🏗  Login to GitHub Container Registry
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-            "ghcr.io/${REPO_OWNER}/${SLUG}/amd64:${VERSION}" \
-            "ghcr.io/${REPO_OWNER}/${SLUG}/aarch64:${VERSION}"
+          sources=()
+          for arch in $(echo "${ARCHITECTURES}" | jq -r '.[]'); do
+            sources+=("ghcr.io/${REPO_OWNER}/${SLUG}/${arch}:${VERSION}")
+          done
+
+          docker buildx imagetools create \
+            --tag "ghcr.io/${REPO_OWNER}/${SLUG}:${ENVIRONMENT}" \
+            "${sources[@]}"
+
+          docker buildx imagetools create \
+            --tag "ghcr.io/${REPO_OWNER}/${SLUG}:${VERSION}" \
+            "${sources[@]}"
